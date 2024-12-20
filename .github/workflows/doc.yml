@@ -1,4 +1,4 @@
-name: Cor Documentation
+name: Core Documentation
 on:
   push:
     branches:
@@ -24,7 +24,7 @@ jobs:
 
       # Upload the generated documentation
       - name: Upload site artifact
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         with:
           name: _site
           path: _site # Must equals the 'build.dest' value on your docfx.json
