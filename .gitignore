@@ -1,5 +1,6 @@
 # Documentation
 docs/api/
+docs/obj/
 docs/index.*
 docs/_site/
 Assets/**/obj*
