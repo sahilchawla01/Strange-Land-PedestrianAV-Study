@@ -51,13 +51,12 @@ jobs:
           name: _site
           
       - name: Debug `_site` before deploy
-        run: ls -R _site
+        run: ls -R ./
          
-      # Move `_site` contents to `public`
       - name: Move files to public folder
         run: |
           mkdir -p public
-          mv _site/* public/
+          mv * public/
 
       - name: Debug `public` directory
         run: ls -R public
