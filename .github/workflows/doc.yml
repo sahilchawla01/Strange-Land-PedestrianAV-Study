@@ -49,15 +49,8 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: _site
+          path: ./public/
           
-      - name: Debug `_site` before deploy
-        run: ls -R ./
-         
-      - name: Move files to public folder
-        run: |
-          mkdir -p public
-          mv * public/
-
       - name: Debug `public` directory
         run: ls -R public
         
