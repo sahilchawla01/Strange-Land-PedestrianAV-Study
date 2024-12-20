@@ -12,17 +12,6 @@
                     ]
                 }
             ],
-            "references": [
-                {
-                    "dll": "C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.32f1\\Editor\\Data\\Managed\\UnityEngine.dll"
-                },
-                {
-                    "dll": "C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.32f1\\Editor\\Data\\Managed\\UnityEngine\\UnityEngine.CoreModule.dll"
-                },
-                {
-                    "dll": "C:\\Program Files\\Unity\\Hub\\Editor\\6000.0.32f1\\Editor\\Data\\Managed\\UnityEngine\\UnityEngine.Networking.dll"
-                }
-            ],
             "globalNamespaceId": "Global",
             "filter": "filterConfig.yml",
             "dest": "api"
