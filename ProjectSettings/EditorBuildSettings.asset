@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Samples/NGO_Minimal_Setup/NGO_Setup.unity
     guid: 0a7ed460d62a1b24a8d62d431fb0bd06
   m_configObjects:
