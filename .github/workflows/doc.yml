@@ -23,7 +23,10 @@ jobs:
 
       - name: Build
         run: docfx docs/docfx.json
-
+        
+      - name: Debug `_site` directory
+        run: dir _site
+        
       # Upload the generated documentation
       - name: Upload site artifact
         uses: actions/upload-artifact@v4
@@ -46,10 +49,22 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: _site
+          
+      - name: Debug `_site` before deploy
+        run: ls -R _site
+         
+      # Move `_site` contents to `public`
+      - name: Move files to public folder
+        run: |
+          mkdir -p public
+          mv _site/* public/
 
+      - name: Debug `public` directory
+        run: ls -R public
+        
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: ./public
+          publish_dir: public
