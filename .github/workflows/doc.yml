@@ -2,7 +2,7 @@ name: Cor Documentation
 on:
   push:
     branches:
-      - doc-testing
+      - main
 
 jobs:
   # Build the documentation
