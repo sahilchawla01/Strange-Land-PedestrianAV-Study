@@ -1,3 +1,20 @@
+# Documentation
+docs/api/
+docs/index.*
+docs/_site/
+Assets/**/obj*
+
+# OS and IDEs
+*.sublime-*
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.vscode
+.idea/*
+
+
 # This .gitignore file should be placed at the root of your Unity project directory
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
