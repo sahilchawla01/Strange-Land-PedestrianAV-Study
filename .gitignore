@@ -3,7 +3,6 @@ docs/api/
 docs/obj/
 docs/index.*
 Assets/**/obj*
-_site/
 
 # OS and IDEs
 *.sublime-*
