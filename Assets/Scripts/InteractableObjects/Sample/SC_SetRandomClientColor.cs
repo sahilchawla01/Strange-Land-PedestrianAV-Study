@@ -1,6 +1,13 @@
 using Unity.Netcode;
 using UnityEngine;
 
+namespace StrangeLand
+{
+
+/// <summary>
+/// This class sets a randcom Client Color on startup and spawing to distinquish clinets.
+/// Its mostly used for debugging network issues. 
+/// </summary>
 [RequireComponent(typeof(Renderer))]
 public class SC_SetRandomClientColor : NetworkBehaviour
 {
@@ -15,9 +22,14 @@ public class SC_SetRandomClientColor : NetworkBehaviour
         SetColorBasedOnOwner();
     }
 
+    /// <summary>
+    /// Setting Color.
+    /// </summary>
     void SetColorBasedOnOwner()
     {
         Random.InitState((int) OwnerClientId);
         GetComponent<Renderer>().material.color = Random.ColorHSV();
     }
+}
+    
 }
