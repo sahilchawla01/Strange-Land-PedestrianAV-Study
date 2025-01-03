@@ -1,4 +1,7 @@
 {
-  "PlayerTags": [],
+  "PlayerTags": [
+    "Researcher",
+    "Participant"
+  ],
   "version": "1.3.3"
 }
