@@ -66,7 +66,7 @@ public class Editor_ClientInterfaceSO : Editor
         var components = go.GetComponents<MonoBehaviour>();
         foreach (var component in components)
         {
-            if (component != null && component is ClientInterface)
+            if (component != null && component is ClientDisplay)
             {
                 return true;
             }

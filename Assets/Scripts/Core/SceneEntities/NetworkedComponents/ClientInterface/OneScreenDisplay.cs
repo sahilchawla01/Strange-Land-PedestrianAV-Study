@@ -2,7 +2,7 @@ using System;
 using Unity.Netcode;
 using UnityEngine;
 
-public class ThreeScreenInterface : ClientInterface
+public class OneScreenDisplay : ClientDisplay
 {
     public override void AssignFollowTransform(InteractableObject MyInteractableObject, ulong targetClient)
     {
@@ -12,6 +12,7 @@ public class ThreeScreenInterface : ClientInterface
         transform.rotation = MyInteractableObject.GetCameraPositionObject().rotation;
         
         NetworkObject.TrySetParent(netobj, true);
+
     }
 
     public override InteractableObject GetFollowTransform()

@@ -1,16 +1,17 @@
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement; 
 
 namespace Core
 {
     /*
      Ahhhhhh so here is the thing. It makes a ton of sense to use Interface for the state machine
      But in networked context is it not the easiest to sync states between server and clients
-     So I'm reluctantlly putting enum here, matching the server state and sync with clients
+     So I'm reluctantly putting enum here, matching the server state and sync with clients
      
      Actively investigating more elegant solutions
      */
+    
     public enum EServerState
     {
         Default,
@@ -31,11 +32,6 @@ namespace Core
         
         void ExitState(ConnectionAndSpawning context);
     }
-    
-    /* I was inclining to use abstract class + virtual methods
-     to provide default implementation (like logging),
-     but I realized I will need to do stuff like "base.enter" in every override, 
-     so it's not making code neater. So we just go with plain interface*/
     
     public class Default : IServerState
     {
@@ -59,7 +55,7 @@ namespace Core
         {
             Debug.Log("WaitingRoomState: Enter state");
         
-            context.ServerLoadScene(ConnectionAndSpawning.Instance.WaitingRoomScene.SceneName);
+            context.ServerLoadScene(ConnectionAndSpawning.Instance.WaitingRoomScene.SceneName, LoadSceneMode.Single);
         }
 
         public void UpdateState(ConnectionAndSpawning context) { }
@@ -83,7 +79,7 @@ namespace Core
         {
             Debug.Log($"Loading scenario: {_scenarioName}");
 
-            context.ServerLoadScene(_scenarioName);
+            context.ServerLoadScene(_scenarioName, LoadSceneMode.Single);
 
             Debug.Log("Destroying old interactable objects, preparing new scenario...");
         }
@@ -117,10 +113,12 @@ namespace Core
 
             var sceneName = scenarioManager.GetVisualSceneName();
 
+            Debug.Log($"Loading visuals scene: {sceneName}");
+            
             if (sceneName == "") return;
             
-            Debug.Log($"Loading visuals scene: {sceneName}");
-            NetworkManager.Singleton.SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+            Debug.Log($"Loading visuals  scene: {sceneName}");
+            context.ServerLoadScene(sceneName, LoadSceneMode.Additive);
         }
 
         public void UpdateState(ConnectionAndSpawning context)
@@ -162,7 +160,12 @@ namespace Core
         }
 
         public void UpdateState(ConnectionAndSpawning context)
-        { }
+        {
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.I))
+            {
+                context.SwitchToState(new Questions());
+            }
+        }
         
         public void ExitState(ConnectionAndSpawning context)
         {
@@ -187,6 +190,25 @@ namespace Core
         public void ExitState(ConnectionAndSpawning context)
         {
             Debug.Log("QuestionsState: Exit state");
+        }
+    }
+    
+    public class PostQuestions : IServerState
+    {
+        public void EnterState(ConnectionAndSpawning context)
+        {
+            Debug.Log("PostQuestionsState: Enter state");
+        }
+
+        public void UpdateState(ConnectionAndSpawning context)
+        {
+        }
+        
+        public void ExitState(ConnectionAndSpawning context)
+        {
+            Debug.Log("PostQuestionsState: Exit state");
+
+            // context.SwitchToState(new WaitingRoom());
         }
     }
 

@@ -10,7 +10,7 @@ public abstract class InteractableObject : NetworkBehaviour {
 
     public NetworkVariable<ParticipantOrder> _participantOrder = new NetworkVariable<ParticipantOrder>();
 
-    public ClientInterface MyClientInterface { get; set; }
+    public ClientDisplay MyClientDisplay { get; set; }
     
     private void Awake()
     {

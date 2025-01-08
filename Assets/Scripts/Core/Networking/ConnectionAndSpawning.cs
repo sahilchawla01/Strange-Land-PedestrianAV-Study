@@ -37,7 +37,7 @@ namespace Core
         public ParticipantOrderMapping Participants = new ParticipantOrderMapping();
         public ParticipantOrder PO { get; private set; } = ParticipantOrder.None;
         
-        private Dictionary<ParticipantOrder, ClientInterface> POToClientInterface = new Dictionary<ParticipantOrder, ClientInterface>();
+        private Dictionary<ParticipantOrder, ClientDisplay> POToClientInterface = new Dictionary<ParticipantOrder, ClientDisplay>();
         
         private Dictionary<ParticipantOrder, List<InteractableObject>> POToInteractableObjects = new Dictionary<ParticipantOrder, List<InteractableObject>>();
         
@@ -173,15 +173,12 @@ namespace Core
             StartCoroutine(IEClientConnectedInternal(clientId));
         }
         
-        /* OK I spent 2 hours on this I read the original ConnectionAndSpawning
-        over and over again and still DK how it ensured client have the waiting room spawned
-        before instantiating the client interface... Really want an elegant solution here*/
         private IEnumerator IEClientConnectedInternal(ulong clientId)
         {
             yield return new WaitForEndOfFrame();
             
             ScenarioManager sm = GetScenarioManager();
-
+            
             ParticipantOrder po = Participants.GetPO(clientId);
             Pose pose = sm.GetSpawnPose(po);
             GameObject clientInterfaceInstance = Instantiate(GetClientInterfacePrefab(po), pose.position, pose.rotation);
@@ -189,7 +186,7 @@ namespace Core
             
             clientInterfaceInstance.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId);
             
-            ClientInterface ci = clientInterfaceInstance.GetComponent<ClientInterface>();
+            ClientDisplay ci = clientInterfaceInstance.GetComponent<ClientDisplay>();
             POToClientInterface.Add(po, ci);
             ci.SetParticipantOrder(po);
         }
@@ -216,10 +213,9 @@ namespace Core
             io.SetParticipantOrder(po);
             POToInteractableObjects[po].Add(io);
             
-            ClientInterface ci = POToClientInterface[po];
+            ClientDisplay ci = POToClientInterface[po];
             ci.AssignFollowTransform(io, clientId);
         }
-
 
         public void SwitchToState(IServerState newState)
         {
@@ -258,11 +254,11 @@ namespace Core
             ClientOption option = ClientOptions.Instance.GetOption(po);
             return InteractableObjectsSO.Instance.InteractableObjects[option.InteractableObject].Prefab;
         }
-        
-        public void ServerLoadScene(string sceneName)
+
+        public void ServerLoadScene(string sceneName, LoadSceneMode mode)
         {
             Debug.Log($"ServerLoadingScene: {sceneName}");
-            NetworkManager.Singleton.SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+            NetworkManager.Singleton.SceneManager.LoadScene(sceneName, mode);
         }
         
         public ScenarioManager GetScenarioManager()

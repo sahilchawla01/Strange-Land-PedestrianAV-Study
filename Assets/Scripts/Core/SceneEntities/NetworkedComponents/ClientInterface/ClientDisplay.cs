@@ -6,12 +6,12 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public abstract class ClientInterface : NetworkBehaviour {
+public abstract class ClientDisplay : NetworkBehaviour {
     
     private NetworkVariable<ParticipantOrder> _participantOrder = new NetworkVariable<ParticipantOrder>();
     
-    private static List<ClientInterface> instances = new List<ClientInterface>(); // Can cause memory leakage if not kept clean...!!! 
-    public static IReadOnlyList<ClientInterface> Instances => instances.AsReadOnly();
+    private static List<ClientDisplay> instances = new List<ClientDisplay>(); // Can cause memory leakage if not kept clean...!!! 
+    public static IReadOnlyList<ClientDisplay> Instances => instances.AsReadOnly();
 
     private void Awake()
     {
