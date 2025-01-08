@@ -8,6 +8,7 @@ public class InteractableObjectSO : ScriptableObject
 {
     [Tooltip("Unique human readable name that will be displayed in the UI and stored in json")]
     public string ID;
+    public EAuthoritativeMode AuthoritativeMode;
     public GameObject Prefab;    
 }
 
@@ -17,11 +18,13 @@ public class Editor_InteractableObjectSO : Editor
 {
     private SerializedProperty objectNameProp;
     private SerializedProperty objectPrefabProp;
+    private SerializedProperty authoritativeModeProp;
 
     private void OnEnable()
     {
         objectNameProp = serializedObject.FindProperty("ID");
         objectPrefabProp = serializedObject.FindProperty("Prefab");
+        authoritativeModeProp = serializedObject.FindProperty("AuthoritativeMode");
     }
 
     public override void OnInspectorGUI()
@@ -29,7 +32,8 @@ public class Editor_InteractableObjectSO : Editor
         serializedObject.Update();
 
         EditorGUILayout.PropertyField(objectNameProp);
-
+        EditorGUILayout.PropertyField(authoritativeModeProp);
+        
         EditorGUI.BeginChangeCheck();
         var newPrefab = EditorGUILayout.ObjectField(
             "Object Prefab",

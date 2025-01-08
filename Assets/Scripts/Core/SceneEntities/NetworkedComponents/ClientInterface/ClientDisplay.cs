@@ -9,6 +9,8 @@ using UnityEngine.EventSystems;
 public abstract class ClientDisplay : NetworkBehaviour {
     
     private NetworkVariable<ParticipantOrder> _participantOrder = new NetworkVariable<ParticipantOrder>();
+
+    public InteractableObject MyInteractableObject;
     
     private static List<ClientDisplay> instances = new List<ClientDisplay>(); // Can cause memory leakage if not kept clean...!!! 
     public static IReadOnlyList<ClientDisplay> Instances => instances.AsReadOnly();
@@ -63,7 +65,23 @@ public abstract class ClientDisplay : NetworkBehaviour {
     public abstract void AssignFollowTransform(InteractableObject MyInteractableObject, ulong targetClient);
     public abstract InteractableObject GetFollowTransform();
 
-    public abstract void De_AssignFollowTransform(ulong clientID,NetworkObject netobj);
+    public virtual void De_AssignFollowTransform(NetworkObject netobj)
+    {
+        if (IsServer)
+        {
+            NetworkObject.TryRemoveParent(false);
+            MyInteractableObject = null;
+            De_AssignFollowTransformClientRPC();
+        }
+    }
+    
+    
+    [ClientRpc]
+    public virtual void De_AssignFollowTransformClientRPC() {
+        MyInteractableObject = null;
+        DontDestroyOnLoad(gameObject);
+    }
+    
     public abstract Transform GetMainCamera();
     
     //David: Once finished callibration return a True to the provided function. onm the server we then know callibration was succesfful. false for callibration failed.

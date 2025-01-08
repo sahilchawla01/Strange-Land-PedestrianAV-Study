@@ -30,7 +30,7 @@ public class ClientOptions
         {
             ClientOption co = new ClientOption();
             co.PO = (ParticipantOrder)i; 
-            co.ClientInterface = 0;
+            co.ClientDisplay = 0;
             co.InteractableObject = 0;
             Options.Add(co);
         }

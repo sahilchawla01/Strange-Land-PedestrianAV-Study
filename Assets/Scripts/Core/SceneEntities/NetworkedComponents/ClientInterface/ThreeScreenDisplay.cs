@@ -19,11 +19,6 @@ public class ThreeScreenDisplay : ClientDisplay
         throw new NotImplementedException();
     }
 
-    public override void De_AssignFollowTransform(ulong clientID, NetworkObject netobj)
-    {
-        throw new NotImplementedException();
-    }
-
     public override Transform GetMainCamera()
     {
         throw new NotImplementedException();

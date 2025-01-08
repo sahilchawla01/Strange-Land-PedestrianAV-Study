@@ -37,9 +37,9 @@ namespace Core
         public ParticipantOrderMapping Participants = new ParticipantOrderMapping();
         public ParticipantOrder PO { get; private set; } = ParticipantOrder.None;
         
-        private Dictionary<ParticipantOrder, ClientDisplay> POToClientInterface = new Dictionary<ParticipantOrder, ClientDisplay>();
-        
-        private Dictionary<ParticipantOrder, List<InteractableObject>> POToInteractableObjects = new Dictionary<ParticipantOrder, List<InteractableObject>>();
+        private Dictionary<ParticipantOrder, ClientDisplay> POToClientDisplay = new Dictionary<ParticipantOrder, ClientDisplay>();
+        // change to one to one
+        private Dictionary<ParticipantOrder, InteractableObject> POToInteractableObjects = new Dictionary<ParticipantOrder, InteractableObject>();
         
         private void Awake()
         {
@@ -105,8 +105,6 @@ namespace Core
             if (approve)
             {
                 Debug.Log($"Approved connection from {request.ClientNetworkId} with PO {joinParams.PO}");
-                POToInteractableObjects.Add(joinParams.PO, new List<InteractableObject>());
-
             }
             else
             {
@@ -129,17 +127,17 @@ namespace Core
         {
             switch (sceneEvent.SceneEventType)
             {
-                // Trigger one on server scene load completed
+                // Trigger once on server scene load completed
                 case SceneEventType.LoadEventCompleted:
                     LoadEventCompleted(sceneEvent);
                     break;
-                // Trigger once a client scene load completed
+                // Trigger once on client scene load completed
                 case SceneEventType.LoadComplete:
                     if (sceneEvent.ClientId == 0)
                     {
                         return;
                     }
-                    Debug.Log($"Client {sceneEvent.ClientId} loaded scene: {sceneEvent.SceneName}, mode: {sceneEvent.LoadSceneMode}, has visual scene: {GetScenarioManager().HasVisualScene()}");
+
                     if (sceneEvent.LoadSceneMode == LoadSceneMode.Additive && GetScenarioManager().HasVisualScene() ||
                         (sceneEvent.LoadSceneMode == LoadSceneMode.Single && !GetScenarioManager().HasVisualScene() ))
                     {
@@ -181,13 +179,13 @@ namespace Core
             
             ParticipantOrder po = Participants.GetPO(clientId);
             Pose pose = sm.GetSpawnPose(po);
-            GameObject clientInterfaceInstance = Instantiate(GetClientInterfacePrefab(po), pose.position, pose.rotation);
+            GameObject clientInterfaceInstance = Instantiate(GetClientDisplayPrefab(po), pose.position, pose.rotation);
             Debug.Log($"Spawned {clientInterfaceInstance.name} for PO {po}");
             
             clientInterfaceInstance.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId);
             
             ClientDisplay ci = clientInterfaceInstance.GetComponent<ClientDisplay>();
-            POToClientInterface.Add(po, ci);
+            POToClientDisplay.Add(po, ci);
             ci.SetParticipantOrder(po);
         }
 
@@ -198,7 +196,7 @@ namespace Core
         
         private IEnumerator IESpawnInteractableObject(ulong clientId)
         {
-            yield return new WaitUntil(() => POToClientInterface.ContainsKey(Participants.GetPO(clientId)));
+            yield return new WaitUntil(() => POToClientDisplay.ContainsKey(Participants.GetPO(clientId)));
             
             ParticipantOrder po = Participants.GetPO(clientId);
             
@@ -207,14 +205,15 @@ namespace Core
             GameObject interactableInstance = Instantiate(GetInteractableObjectPrefab(po), pose.position, pose.rotation);
             Debug.Log($"Spawned {interactableInstance.name} for PO {po}");
             
+            // different depending on SO config
             interactableInstance.GetComponent<NetworkObject>().SpawnWithOwnership(clientId);
             
             InteractableObject io = interactableInstance.GetComponent<InteractableObject>();
             io.SetParticipantOrder(po);
-            POToInteractableObjects[po].Add(io);
+            POToInteractableObjects[po] = io;
             
-            ClientDisplay ci = POToClientInterface[po];
-            ci.AssignFollowTransform(io, clientId);
+            ClientDisplay cientDisplay = POToClientDisplay[po];
+            cientDisplay.AssignFollowTransform(io, clientId);
         }
 
         public void SwitchToState(IServerState newState)
@@ -228,6 +227,7 @@ namespace Core
             
             string stateName = _currentState.GetType().Name;
             
+            // :(
             ServerStateEnum.Value = (EServerState) Enum.Parse(typeof(EServerState), stateName);
         
             _currentState.EnterState(this);
@@ -243,10 +243,10 @@ namespace Core
             }
         }
         
-        private GameObject GetClientInterfacePrefab(ParticipantOrder po)
+        private GameObject GetClientDisplayPrefab(ParticipantOrder po)
         {
             ClientOption option = ClientOptions.Instance.GetOption(po);
-            return ClientInterfacesSO.Instance.ClientInterfaces[option.ClientInterface].Prefab;
+            return ClientDisplaysSO.Instance.ClientDisplays[option.ClientDisplay].Prefab;
         }
         
         private GameObject GetInteractableObjectPrefab(ParticipantOrder po)
@@ -269,6 +269,14 @@ namespace Core
         // expose simple APIs for other classes to trigger
         public void SwitchToLoading(string scenarioName)
         {
+            foreach (ParticipantOrder po in POToInteractableObjects.Keys)
+            {
+                foreach (InteractableObject io in POToInteractableObjects.Values)
+                {
+                    POToClientDisplay[po].De_AssignFollowTransform(io.GetComponent<NetworkObject>());
+                }
+            }
+            
             DestroyAllClientsInteractables();
             SwitchToState(new LoadingScenario(scenarioName));
         }
@@ -283,11 +291,7 @@ namespace Core
         
         private void DestroyAllInteractableObjects(ParticipantOrder po)
         {
-            foreach (var io in POToInteractableObjects[po])
-            {
-                io.gameObject.GetComponent<NetworkObject>().Despawn(true);
-            }
-            POToInteractableObjects[po].Clear();
+            POToInteractableObjects[po].gameObject.GetComponent<NetworkObject>().Despawn(true);
         }
 
         [ContextMenu("SwitchToWaitingRoom")]

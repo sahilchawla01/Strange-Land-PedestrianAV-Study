@@ -24,6 +24,8 @@ namespace Core
         PostQuestions
     }
     
+    
+    
     public interface IServerState
     {
         void EnterState(ConnectionAndSpawning context);

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System;
+using UnityEngine.Serialization;
 
 public enum ParticipantOrder {
     A,
@@ -22,7 +23,7 @@ public enum Language {
 public struct ClientOption
 {
     public ParticipantOrder PO;
-    public int ClientInterface;
+    public int ClientDisplay;
     public int InteractableObject;
 }
 
@@ -30,5 +31,4 @@ public struct ClientOption
 public struct JoinParameters
 {
     public ParticipantOrder PO;
-    public Language Language;
 }

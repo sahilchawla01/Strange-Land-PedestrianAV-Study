@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1026b0650be278d449f82077e9dd199d, type: 3}
-  m_Name: ClientInterfacesSO
+  m_Name: ClientDisplaysSO
   m_EditorClassIdentifier: 
-  ClientInterfaces:
+  ClientDisplays:
   - {fileID: 11400000, guid: 341cc892aaf0e774e8555cc6439a22a4, type: 2}
   - {fileID: 11400000, guid: db01c701d28c95444b50711e7e68c797, type: 2}

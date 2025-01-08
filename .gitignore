@@ -91,3 +91,4 @@ crashlytics-build.properties
 # Path to put utility plugins
 /[Aa]ssets/IgnoredUtilityPlugins
 /[Aa]ssets/IgnoredUtilityPlugins.meta
+/Packages/com.singularitygroup.hotreload

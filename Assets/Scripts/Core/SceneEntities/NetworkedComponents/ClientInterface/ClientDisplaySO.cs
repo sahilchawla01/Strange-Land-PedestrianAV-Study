@@ -4,25 +4,28 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-public class ClientInterfaceSO : ScriptableObject
+public class ClientDisplaySO : ScriptableObject
 {
     [Tooltip("Unique human readable name that will be displayed in the UI and stored in json")]
     public string ID;
+    public EAuthoritativeMode AuthoritativeMode;
     public GameObject Prefab;
 }
 
 
 #if UNITY_EDITOR
-[CustomEditor(typeof(ClientInterfaceSO))]
-public class Editor_ClientInterfaceSO : Editor
+[CustomEditor(typeof(ClientDisplaySO))]
+public class Editor_ClientDisplaySO : Editor
 {
     private SerializedProperty interfaceNameProp;
     private SerializedProperty interfacePrefabProp;
+    private SerializedProperty authoritativeModeProp;
 
     private void OnEnable()
     {
         interfaceNameProp = serializedObject.FindProperty("ID");
         interfacePrefabProp = serializedObject.FindProperty("Prefab");
+        authoritativeModeProp = serializedObject.FindProperty("AuthoritativeMode"); 
     }
 
     public override void OnInspectorGUI()
@@ -30,6 +33,7 @@ public class Editor_ClientInterfaceSO : Editor
         serializedObject.Update();
 
         EditorGUILayout.PropertyField(interfaceNameProp);
+        EditorGUILayout.PropertyField(authoritativeModeProp);
 
         EditorGUI.BeginChangeCheck();
         var newPrefab = EditorGUILayout.ObjectField(

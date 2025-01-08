@@ -32,7 +32,6 @@ namespace Core
             _joinParameters = new JoinParameters
             {
                 PO = (ParticipantOrder) PODropdown.value,
-                Language = (Language) LanguageDropdown.value
             };
         }
         

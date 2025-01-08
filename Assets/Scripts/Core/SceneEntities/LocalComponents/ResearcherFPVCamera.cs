@@ -38,7 +38,7 @@ public class FreeCameraController : MonoBehaviour
 
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
-
+        
         Vector3 right = transform.right;
         right.y = 0f;
         right.Normalize();

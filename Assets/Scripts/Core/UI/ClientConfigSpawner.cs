@@ -52,15 +52,15 @@ public class ClientConfigSpawner : MonoBehaviour
             // ui.POText.text = $"""Participant Order <color="blue">{option.PO}</color>""";
             ui.POText.text = $"Participant Order {option.PO}";
             
-            var interfaceNames = ClientInterfacesSO.Instance.ClientInterfaces
+            var interfaceNames = ClientDisplaysSO.Instance.ClientDisplays
                 .Select(ci => ci.ID)
                 .ToList();
 
-            ui.ClientInterfaceDropdown.ClearOptions();
-            ui.ClientInterfaceDropdown.AddOptions(interfaceNames);
+            ui.ClientDisplayDropdown.ClearOptions();
+            ui.ClientDisplayDropdown.AddOptions(interfaceNames);
 
-            ui.ClientInterfaceDropdown.value = option.ClientInterface;
-            ui.ClientInterfaceDropdown.RefreshShownValue();
+            ui.ClientDisplayDropdown.value = option.ClientDisplay;
+            ui.ClientDisplayDropdown.RefreshShownValue();
 
             var objNames = InteractableObjectsSO.Instance.InteractableObjects
                 .Select(io => io.ID)
@@ -83,7 +83,7 @@ public class ClientConfigSpawner : MonoBehaviour
         {
             var ui = spawnedConfigUIs[i];
             var option = ClientOptions.Instance.Options[i];
-            option.ClientInterface = ui.ClientInterfaceDropdown.value;
+            option.ClientDisplay = ui.ClientDisplayDropdown.value;
             option.InteractableObject = ui.SpawnTypeDropdown.value;
 
             ClientOptions.Instance.Options[i] = option;

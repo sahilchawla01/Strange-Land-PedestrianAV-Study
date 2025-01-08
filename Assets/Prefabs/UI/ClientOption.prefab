@@ -2328,7 +2328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   POText: {fileID: 9131406709355196448}
-  ClientInterfaceDropdown: {fileID: 4066424909529719763}
+  ClientDisplayDropdown: {fileID: 4066424909529719763}
   SpawnTypeDropdown: {fileID: 1109704374634395600}
 --- !u!1 &8022135433777850734
 GameObject:
