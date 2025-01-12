@@ -28,6 +28,8 @@ namespace Core
     
     public interface IServerState
     {
+        public EServerState State { get; }
+        
         void EnterState(ConnectionAndSpawning context);
         
         void UpdateState(ConnectionAndSpawning context);
@@ -37,6 +39,8 @@ namespace Core
     
     public class Default : IServerState
     {
+        public EServerState State => EServerState.Default;
+        
         public void EnterState(ConnectionAndSpawning context)
         {
             Debug.Log("DefaultState: Enter state");
@@ -53,6 +57,8 @@ namespace Core
     
     public class WaitingRoom : IServerState
     {
+        public EServerState State => EServerState.WaitingRoom;
+        
         public void EnterState(ConnectionAndSpawning context)
         {
             Debug.Log("WaitingRoomState: Enter state");
@@ -70,6 +76,8 @@ namespace Core
     
     public class LoadingScenario : IServerState
     {
+        public EServerState State => EServerState.LoadingScenario;
+        
         private readonly string _scenarioName;
     
         public LoadingScenario(string scenarioName)
@@ -96,6 +104,8 @@ namespace Core
 
     public class LoadingVisuals : IServerState
     {
+        public EServerState State => EServerState.LoadingVisuals;
+        
         public void EnterState(ConnectionAndSpawning context)
         {
             Debug.Log("LoadingVisualsState: Enter state");
@@ -135,6 +145,8 @@ namespace Core
 
     public class Ready : IServerState
     {
+        public EServerState State => EServerState.Ready;
+        
         public void EnterState(ConnectionAndSpawning context)
         {
             Debug.Log("ReadyState: Enter state");
@@ -156,6 +168,8 @@ namespace Core
     
     public class Interact : IServerState
     {
+        public EServerState State => EServerState.Interact;
+        
         public void EnterState(ConnectionAndSpawning context)
         {
             Debug.Log("InteractState: Enter state");
@@ -177,6 +191,8 @@ namespace Core
     
     public class Questions : IServerState
     {
+        public EServerState State => EServerState.Questions;
+        
         public void EnterState(ConnectionAndSpawning context)
         {
             Debug.Log("QuestionsState: Enter state");
@@ -197,6 +213,8 @@ namespace Core
     
     public class PostQuestions : IServerState
     {
+        public EServerState State => EServerState.PostQuestions;
+        
         public void EnterState(ConnectionAndSpawning context)
         {
             Debug.Log("PostQuestionsState: Enter state");

@@ -82,7 +82,7 @@ public class StrangeLandLogger : MonoBehaviour
         logItems.Add(new LogItem(null, (refobj) => (Time.time - ScenarioStartTime).ToString(Fpres), "ScenarioTime"));
         logItems.Add(new LogItem(null, (refobj) => Time.smoothDeltaTime.ToString(Fpres), "DeltaTime"));
         logItems.Add(new LogItem(null, (refobj) => Time.frameCount.ToString(), "FrameCount"));
-        StrangeLandTransform[] strangeLandObjects = FindObjectsOfType<StrangeLandTransform>();
+        StrangeLandTransform[] strangeLandObjects = FindObjectsByType<StrangeLandTransform>(sortMode: FindObjectsSortMode.None);
         foreach (var slt in strangeLandObjects)
         {
             ParticipantOrder PO;

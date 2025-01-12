@@ -226,9 +226,8 @@ namespace Core
             _currentState = newState;
             
             string stateName = _currentState.GetType().Name;
-            
-            // :(
-            ServerStateEnum.Value = (EServerState) Enum.Parse(typeof(EServerState), stateName);
+
+            ServerStateEnum.Value = _currentState.State;
         
             _currentState.EnterState(this);
         }
