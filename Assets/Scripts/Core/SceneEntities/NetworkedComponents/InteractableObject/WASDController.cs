@@ -81,11 +81,10 @@ public class WASDController : InteractableObject
 
         Vector3 moveDirection = (transform.forward * verticalInput + transform.right * horizontalInput).normalized;
 
-        // Apply movement only if grounded
         if (isGrounded)
         {
             Vector3 velocity = moveDirection * moveSpeed;
-            velocity.y = rb.linearVelocity.y;  // Retain vertical velocity for jump and gravity
+            velocity.y = rb.linearVelocity.y;  
             rb.linearVelocity = velocity;
 
             if (Input.GetKeyDown(KeyCode.Space))

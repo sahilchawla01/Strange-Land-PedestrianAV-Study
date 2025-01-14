@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class StrangeLandTransform : MonoBehaviour
 {
@@ -7,4 +6,5 @@ public class StrangeLandTransform : MonoBehaviour
     
     public bool LogPosition = true;
     public bool LogRotation = true;
+    public bool LogScale = true;
 }

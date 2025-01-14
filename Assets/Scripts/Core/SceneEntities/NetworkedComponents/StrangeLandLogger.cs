@@ -91,9 +91,17 @@ public class StrangeLandLogger : MonoBehaviour
             string finalNameForLog = !string.IsNullOrEmpty(slt.OverrideName) ? slt.OverrideName : slt.gameObject.name;
             string labelPrefix = PO.ToString() + "_" + parentName + "_" + finalNameForLog;
             if (slt.LogPosition)
+            {
                 logItems.Add(new LogItem(slt.transform, PositionLog, labelPrefix + "_Pos"));
+            }            
             if (slt.LogRotation)
+            {
                 logItems.Add(new LogItem(slt.transform, OrientationLog, labelPrefix + "_Rot"));
+            }        
+            if (slt.LogScale)
+            {
+                logItems.Add(new LogItem(slt.transform, ScaleLog, labelPrefix + "_Scale"));
+            }
         }
         var headerRow = "";
         foreach (var item in logItems)
@@ -181,6 +189,19 @@ public class StrangeLandLogger : MonoBehaviour
         Array.Copy(BitConverter.GetBytes(euler.z), 0, buffer, 8, 4);
         return Convert.ToBase64String(buffer);
     }
+    
+    // I actually DK if I should record local or lossy(global) scale here
+    private string ScaleLog(object o)
+    {
+        Transform t = (Transform)o;
+        Vector3 scale = t.lossyScale;
+        byte[] buffer = new byte[3 * 4];
+        Array.Copy(BitConverter.GetBytes(scale.x), 0, buffer, 0, 4);
+        Array.Copy(BitConverter.GetBytes(scale.y), 0, buffer, 4, 4);
+        Array.Copy(BitConverter.GetBytes(scale.z), 0, buffer, 8, 4);
+        return Convert.ToBase64String(buffer);
+    }
+    
     private void FindClosestParentDisplayOrInteractable(Transform child, out ParticipantOrder pOrder, out string parentName)
     {
         pOrder = ParticipantOrder.None;
