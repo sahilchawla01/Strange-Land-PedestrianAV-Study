@@ -7,4 +7,6 @@ public class StrangeLandTransform : MonoBehaviour
     public bool LogPosition = true;
     public bool LogRotation = true;
     public bool LogScale = true;
+
+    public bool SyncTransforms = true;
 }
