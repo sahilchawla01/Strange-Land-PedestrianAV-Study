@@ -1,0 +1,136 @@
+fileFormatVersion: 2
+guid: abc00000000009329924418997686272
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Root
+    100004: Front_Right_Wheel
+    100006: Front_Left_Wheel
+    100008: Rear_Right_Wheel
+    100010: Rear_Left_Wheel
+    100012: Left_Door
+    100014: Right_Door
+    100016: Root
+    100018: Front_Right_Wheel
+    100020: Front_Left_Wheel
+    100022: Rear_Right_Wheel
+    100024: Rear_Left_Wheel
+    100026: Left_Door
+    100028: Right_Door
+    400000: //RootNode
+    400002: Root
+    400004: Front_Right_Wheel
+    400006: Front_Left_Wheel
+    400008: Rear_Right_Wheel
+    400010: Rear_Left_Wheel
+    400012: Left_Door
+    400014: Right_Door
+    400016: Root
+    400018: Front_Right_Wheel
+    400020: Front_Left_Wheel
+    400022: Rear_Right_Wheel
+    400024: Rear_Left_Wheel
+    400026: Left_Door
+    400028: Right_Door
+    2100000: MI_CarPaint_10_Red
+    2100002: MI_Glass
+    2100004: MI_Metal_Anodized_01_Bright
+    2100006: MI_Black_Plastic
+    2100008: MI_TireRubber
+    2100010: MI_Icon
+    2100012: MI_mirror
+    2100014: MI_Glass_Lights
+    2100016: MI_Reflector_RED_Translucent
+    2100018: MI_Reflector_Grey
+    2100020: MI_Reflector_Grey
+    2100022: MI_Reflector_RED
+    2100024: MI_Reflector_RED
+    2100026: MI_Reflector_Orange
+    2100028: MI_Car_Bottom
+    2100030: MI_Leather_02_Black_Dark
+    2100032: MI_Leather_07_Tan_Red
+    2100034: MI_Car_Panels
+    2100036: MI_Alcantara_Black
+    2100038: MI_Speedmeter
+    2100040: MI_Metal_Anodized_01_Dark
+    2100042: MI_BrakeRotor_Iron
+    2100044: MI_Plastic_Grid
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: sedane_LOD0
+    4300002: sedane_LOD0
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 1
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 0
+    keepQuads: 0
+    weldVertices: 0
+    preserveHierarchy: 0
+    indexFormat : 2
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant:
