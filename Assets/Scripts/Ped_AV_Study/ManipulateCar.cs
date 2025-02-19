@@ -157,6 +157,9 @@ namespace Ped_AV_Study
                 //Create audio source
                 AudioSource audioSource = gameObject.AddComponent<AudioSource>();
                 audioSource.playOnAwake = false;
+                //Set 3D audio
+                audioSource.spatialize = true;
+                audioSource.spatialBlend = 1.0f;
                 
                 //Add audio source to a list
                 m_audioSources.Add(audioSource);
