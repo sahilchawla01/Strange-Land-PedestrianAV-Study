@@ -16,13 +16,16 @@ namespace Ped_AV_Study
         private AudioSource m_audioSource;   
         private CarAnimationSetting m_currentAnimationSetting;
       
-      
+        // -- MISCELLANEOUS -- 
         private Vector3 m_finalPosition;
         private Vector3 m_startPosition;
         private Quaternion m_startRotation;
         private float m_elapsedTime = 0f;
         
         private bool bPlayAnimation = false;
+        
+        // -- COROUTINES -
+        List<IEnumerator> m_audioCueCoroutines = new List<IEnumerator>();
         void Start()
         {
             //Store components
@@ -52,9 +55,29 @@ namespace Ped_AV_Study
       
         public void StartAnimation()
         {
+            if (!m_currentAnimationSetting)
+            {
+                Debug.LogError("MANIPULATECAR.cs: No animation setting when StartAnimation was called");
+                return;
+            }
+            
+            //Flag used in Update() to "play" car moving animation
             bPlayAnimation = true;
 
             StartCoroutine(StopAnimationAfterTimerEnds());
+            
+            //Iterate through all audio cues for the current animation setting and play respective audio after some elapsed time
+            if (m_currentAnimationSetting)
+            {
+                foreach (CarAudioSetting carAudioSetting in m_currentAnimationSetting.carAudioSettings)
+                {
+                    //Store coroutine in a list
+                    IEnumerator soundCoroutine = PlaySoundAtTime(carAudioSetting);
+                    m_audioCueCoroutines.Add(soundCoroutine);
+                    
+                    StartCoroutine(soundCoroutine);
+                }
+            }
         }
 
         IEnumerator StopAnimationAfterTimerEnds()
@@ -64,12 +87,29 @@ namespace Ped_AV_Study
             StopAnimation();
         }
 
+        IEnumerator PlaySoundAtTime(CarAudioSetting audioSetting)
+        {
+            yield return new WaitForSeconds(m_currentAnimationSetting.animationTime);
+            
+            //Play sound
+        }
+
         public void StopAnimation(bool bResetCarConfig = false)
         {
             bPlayAnimation = false;
+            m_elapsedTime = 0f;
           
             //Clear any coroutine in the case animation was stopped prematurely
             StopCoroutine(nameof(StopAnimationAfterTimerEnds));
+            
+            //Clear all audio playing coroutines in case animation was stopped prematurely
+            foreach (IEnumerator coroutine in m_audioCueCoroutines)
+            {
+                StopCoroutine(coroutine);
+            }
+            
+            //Empty audio cue coroutine list
+            m_audioCueCoroutines.Clear();
 
             if (bResetCarConfig)
             {
