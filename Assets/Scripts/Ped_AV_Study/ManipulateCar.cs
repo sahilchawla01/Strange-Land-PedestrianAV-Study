@@ -75,6 +75,7 @@ namespace Ped_AV_Study
                     IEnumerator soundCoroutine = PlaySoundAtTime(carAudioSetting);
                     m_audioCueCoroutines.Add(soundCoroutine);
                     
+                    //Call sound coroutine 
                     StartCoroutine(soundCoroutine);
                 }
             }
@@ -89,9 +90,14 @@ namespace Ped_AV_Study
 
         IEnumerator PlaySoundAtTime(CarAudioSetting audioSetting)
         {
-            yield return new WaitForSeconds(m_currentAnimationSetting.animationTime);
+            yield return new WaitForSeconds(audioSetting.timeToPlayAudio);
             
             //Play sound
+            m_audioSource.clip = audioSetting.audioClipToPlay;
+            m_audioSource.volume = audioSetting.volume;
+            m_audioSource.Play();
+            
+            Debug.Log("MANIPULATECAR.cs: PlaySoundAtTime was called for sound: " + audioSetting.audioClipToPlay.name);
         }
 
         public void StopAnimation(bool bResetCarConfig = false)

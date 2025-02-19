@@ -15,4 +15,5 @@ MonoBehaviour:
   startDistance: 100
   animationTime: 2
   carAudioSettings:
-  - {fileID: 11400000, guid: 7a1f8002bac13d24f9cf97d3e1cdb2c0, type: 2}
+  - {fileID: 11400000, guid: 324c8120ff885d843b145cb3051b0e87, type: 2}
+  - {fileID: 11400000, guid: a5e9b977f7e496e4dbc8f13aa6c929d7, type: 2}
