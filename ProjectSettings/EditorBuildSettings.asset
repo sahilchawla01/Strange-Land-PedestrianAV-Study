@@ -21,5 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/VisualDemo_Plain.unity
     guid: b4eac181d4fe4db4ca1ef0740f8d6d96
   m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 7613d925b55b8ff40ba0e8c622655276, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 482c56ebd3083c74499531bd82913fad, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 1c497c52310f9c34e878ba68f128dffa, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 8f6ae0950cefc5a478ccde40c7948149, type: 2}
   m_UseUCBPForAssetBundles: 0
