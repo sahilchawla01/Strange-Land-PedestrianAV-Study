@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: CarAudioWoot
   m_EditorClassIdentifier: 
   volume: 0.3
-  timeToPlayAudio: 0.5
+  timeToPlayAudio: 2.5
   audioClipToPlay: {fileID: 8300000, guid: a62df8d42f5a96944969bb7e0a5be625, type: 3}

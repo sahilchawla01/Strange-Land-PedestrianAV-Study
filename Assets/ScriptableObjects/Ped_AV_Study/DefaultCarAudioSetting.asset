@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: DefaultCarAudioSetting
   m_EditorClassIdentifier: 
   volume: 0.2
-  timeToPlayAudio: 1
+  timeToPlayAudio: 2
   audioClipToPlay: {fileID: 8300000, guid: a62df8d42f5a96944969bb7e0a5be625, type: 3}

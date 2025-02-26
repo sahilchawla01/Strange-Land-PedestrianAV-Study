@@ -5,24 +5,20 @@ namespace Ped_AV_Study
     public class AnimateWheels : MonoBehaviour
     {
         public float wheelRadius = 0.3f;
-        private GameObject[] wheels;
-        private readonly float TwoPI = 6.28318530718f;
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
-        {
-        }
-
-        public void SetWheelGameObjects(in GameObject[] wheelsList, in Vector3 axisToRotateAround)
-        {
-            wheels = wheelsList;
-        }
+        public GameObject[] wheels;
 
         public void CalculateAndSetWheelRotations(in float carSpeed)
         {
-            //Calculate how much rotation to add
+            //Calculate how much rotation speed
+            float angularVelocity = carSpeed / wheelRadius;
+            // Convert to degrees per frame
+            float rotationSpeed = angularVelocity * Mathf.Rad2Deg; 
             
             //Iterate through all wheels and add rotation
-            // Quaternion.rota
+            foreach (GameObject wheel in wheels)
+            {
+                wheel.transform.Rotate(Vector3.up, -rotationSpeed * Time.deltaTime);
+            }
         }
     }
 }

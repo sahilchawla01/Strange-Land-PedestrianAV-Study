@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 130d8ae3d90d6754ca34ef4e60eeadd4, type: 3}
   m_Name: DefaultCarAnimationSetting
   m_EditorClassIdentifier: 
-  startDistance: 100
-  animationTime: 2
+  startDistance: 50
+  animationTime: 20
   carAudioSettings:
   - {fileID: 11400000, guid: 324c8120ff885d843b145cb3051b0e87, type: 2}
   - {fileID: 11400000, guid: a5e9b977f7e496e4dbc8f13aa6c929d7, type: 2}

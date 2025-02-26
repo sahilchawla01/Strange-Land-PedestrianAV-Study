@@ -333,6 +333,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4499062357938038151}
   - component: {fileID: 1258527068187389192}
+  - component: {fileID: 7326839380505056065}
   m_Layer: 0
   m_Name: Hatchback_Car
   m_TagString: Untagged
@@ -396,6 +397,24 @@ MonoBehaviour:
   initAnimationSetting: {fileID: 11400000, guid: f676831d75816e8458450932afb5779f, type: 2}
   carAnimations:
   - {fileID: 11400000, guid: f676831d75816e8458450932afb5779f, type: 2}
+--- !u!114 &7326839380505056065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7151280144961606696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fd9dfa418dd7f543a3ef5bf688f58ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wheelRadius: 0.3
+  wheels:
+  - {fileID: 892305029709189983}
+  - {fileID: 2654357534235209132}
+  - {fileID: 2364245801098644921}
+  - {fileID: 2844215975957230269}
 --- !u!1 &9050661907012841866
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Ped_AV_Study;
 using Ped_AV_Study.ScriptableObjectBase;
 using UnityEngine;
 
 namespace Ped_AV_Study
 {
+    [RequireComponent(typeof(AnimateWheels))]
     public class ManipulateCar : MonoBehaviour
     {
         public AnimationCurve easeCurve = AnimationCurve.EaseInOut(0, 0, 1, 1); // Easing curve
@@ -14,10 +16,12 @@ namespace Ped_AV_Study
         // -- COMPONENTS --
         private List<AudioSource> m_audioSources = new List<AudioSource>();
         private CarAnimationSetting m_currentAnimationSetting;
+        private AnimateWheels m_animateWheelsScript;
       
         // -- MISCELLANEOUS -- 
         private Vector3 m_finalPosition;
         private Vector3 m_startPosition;
+        private Vector3 m_positionLastFrame;
         private Quaternion m_startRotation;
         private float m_elapsedTime = 0f;
         
@@ -30,6 +34,9 @@ namespace Ped_AV_Study
             // Store the final position and rotation
             m_finalPosition = transform.position;
             m_startRotation = transform.rotation;
+            
+            //Store scripts
+            m_animateWheelsScript = GetComponent<AnimateWheels>();
           
             //Set animation setting before playing the car animation
             SetAnimationSettings(initAnimationSetting);
@@ -43,7 +50,8 @@ namespace Ped_AV_Study
           
             // Calculate the start position by moving in the opposite direction of the forward vector
             m_startPosition = m_finalPosition - transform.forward * m_currentAnimationSetting.startDistance;
-          
+            m_positionLastFrame = m_startPosition;
+            
             // Set the initial position of the object to the start position
             transform.position = m_startPosition;
         }
@@ -119,10 +127,12 @@ namespace Ped_AV_Study
             RemoveAudioSourceComponents();
             
 
+            //Reset car config
             if (bResetCarConfig)
             {
-                //Reset position of car
+                //Reset car position
                 transform.SetPositionAndRotation(m_startPosition, m_startRotation);
+                m_positionLastFrame = m_startPosition;
               
             }
           
@@ -131,7 +141,8 @@ namespace Ped_AV_Study
         void Update()
         {
             if (!bPlayAnimation) return;
-          
+            
+            //When animation is running, calculate and set state of the car including position, wheel rotation, etc.
             if (m_currentAnimationSetting && m_elapsedTime < m_currentAnimationSetting.animationTime)
             {
                 // Increment the elapsed time
@@ -145,7 +156,16 @@ namespace Ped_AV_Study
       
                 // Interpolate between the start and final positions
                 transform.position = Vector3.LerpUnclamped(m_startPosition, m_finalPosition, easedTime);
-
+                
+                //Get distance travelled in 1 frame
+                float distanceTravelled = Vector3.Distance(transform.position, m_positionLastFrame);
+                float carSpeed = distanceTravelled / Time.deltaTime;
+                
+                //Animate the wheels according to current speed
+                m_animateWheelsScript.CalculateAndSetWheelRotations(carSpeed);
+                
+                //Update last frame position
+                m_positionLastFrame = transform.position;
             }
         }
 
