@@ -41,7 +41,7 @@ namespace Ped_AV_Study
             //Set animation setting before playing the car animation
             SetAnimationSettings(initAnimationSetting);
             
-            StartAnimation();
+            // StartAnimation();
         }
 
         public void SetAnimationSettings(CarAnimationSetting animationSetting)
@@ -117,8 +117,10 @@ namespace Ped_AV_Study
             Debug.Log("MANIPULATECAR.cs: PlaySoundAtTime was called for sound: " + audioSetting.audioClipToPlay.name);
         }
 
-        public void StopAnimation(bool bResetCarAnimation = false)
+        public void StopAnimation(bool bResetCarState = false)
         {
+            Debug.Log("MANIPULATECAR.cs: Stopping animation, reset car state: " + bResetCarState);
+
             bPlayAnimation = false;
             m_elapsedTime = 0f;
           
@@ -137,8 +139,8 @@ namespace Ped_AV_Study
             RemoveAudioSourceComponents();
             
 
-            //Reset car config
-            if (bResetCarAnimation)
+            //Reset car state
+            if (bResetCarState)
             {
                 //Reset car position to no animation position / reference position
                 transform.SetPositionAndRotation(m_initCarPosition, m_animStartRotation);
@@ -148,6 +150,22 @@ namespace Ped_AV_Study
   
         void Update()
         {
+            if (Input.GetKey(KeyCode.R))
+            {
+                StopAnimation();
+            }
+            
+            if (Input.GetKey(KeyCode.Space))
+            {
+                StopAnimation(true);
+            }
+            
+            if (Input.GetKey(KeyCode.P))
+            {
+                StartAnimation();
+            }
+
+            
             if (!bPlayAnimation) return;
             
             //When animation is running, calculate and set state of the car including position, wheel rotation, etc.
@@ -201,6 +219,8 @@ namespace Ped_AV_Study
                 source.Stop();
                 Destroy(source);
             }
+            
+            m_audioSources.Clear();
         }
       
     }
