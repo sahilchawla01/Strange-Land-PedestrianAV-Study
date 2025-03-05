@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Ped_AV_Study.ScriptableObjectBase
 {
@@ -7,7 +9,11 @@ namespace Ped_AV_Study.ScriptableObjectBase
     public class CarAnimationSetting : ScriptableObject
     {
         // Distance from the current position to start the animation
-        public float startDistance = 100.0f;
+        [Tooltip("Distance from the current position to start the animation from")] 
+        public UInt16 distanceFromStartPosition = 100;
+        //If greater than 0, stop animation 'x' distance from final position
+        [Tooltip("If greater than 0, stop car animation 'x' distance from final position")]
+        public UInt16 earlyStoppingDistance = 20;
         // Total time for the animation
         public float animationTime = 2.0f;
         // The curve the speed of the car should follow

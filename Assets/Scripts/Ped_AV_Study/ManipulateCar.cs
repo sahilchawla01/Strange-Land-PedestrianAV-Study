@@ -30,10 +30,6 @@ namespace Ped_AV_Study
         List<IEnumerator> m_audioCueCoroutines = new List<IEnumerator>();
         void Start()
         {
-            // Store the final position and rotation
-            m_finalPosition = transform.position;
-            m_startRotation = transform.rotation;
-            
             //Store scripts
             m_animateWheelsScript = GetComponent<AnimateWheels>();
           
@@ -46,9 +42,15 @@ namespace Ped_AV_Study
         public void SetAnimationSettings(CarAnimationSetting animationSetting)
         {
             m_currentAnimationSetting = animationSetting;
+            
+            // Store the final position and rotation
+            
+            //Bring the final position back by specified amount
+            m_finalPosition = transform.position - transform.forward * m_currentAnimationSetting.earlyStoppingDistance;
+            m_startRotation = transform.rotation;
           
             // Calculate the start position by moving in the opposite direction of the forward vector
-            m_startPosition = m_finalPosition - transform.forward * m_currentAnimationSetting.startDistance;
+            m_startPosition = m_finalPosition - transform.forward * m_currentAnimationSetting.distanceFromStartPosition;
             m_positionLastFrame = m_startPosition;
             
             // Set the initial position of the object to the start position

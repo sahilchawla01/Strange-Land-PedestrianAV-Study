@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 130d8ae3d90d6754ca34ef4e60eeadd4, type: 3}
   m_Name: DefaultCarAnimationSetting
   m_EditorClassIdentifier: 
-  startDistance: 50
+  distanceFromStartPosition: 50
+  earlyStoppingDistance: 0
   animationTime: 20
   easeCurve:
     serializedVersion: 2
