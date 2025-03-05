@@ -28,12 +28,14 @@ namespace Ped_AV_Study
 
         //This position refers the reference point where the car is placed in the scene initially.
         private Vector3 m_initCarPosition;
+        private Quaternion m_initCarRotation;
         
         // -- COROUTINES -
         List<IEnumerator> m_audioCueCoroutines = new List<IEnumerator>();
         void Start()
         {
             m_initCarPosition = transform.position;
+            m_initCarRotation = transform.rotation;
             
             //Store scripts
             m_animateWheelsScript = GetComponent<AnimateWheels>();
@@ -46,15 +48,12 @@ namespace Ped_AV_Study
 
         public void SetAnimationSettings(CarAnimationSetting animationSetting)
         {
-            //Reset car position and rotation in case not done
-            if(transform.position != m_initCarPosition) 
-                transform.SetPositionAndRotation(m_initCarPosition, m_animStartRotation);
-            
+            //Store curr animation setting
             m_currentAnimationSetting = animationSetting;
             
-            // Store the final position and rotation
-            
-            //Bring the final position back by specified amount
+            ResetCarStateToDefault();
+                
+            // Store the final position and rotation and bring final pos back by specified amount
             m_animFinalPosition = transform.position - transform.forward * m_currentAnimationSetting.earlyStoppingDistance;
             m_animStartRotation = transform.rotation;
           
@@ -62,8 +61,6 @@ namespace Ped_AV_Study
             m_animStartPosition = m_animFinalPosition - transform.forward * m_currentAnimationSetting.distanceFromStartPosition;
             m_animPositionLastFrame = m_animStartPosition;
             
-            // Set up the animation initial transform for the car
-            transform.SetPositionAndRotation(m_animStartPosition, m_animStartRotation);
         }
 
       
@@ -75,13 +72,15 @@ namespace Ped_AV_Study
                 return;
             }
             
+            Debug.Log("MANIPULATECAR.cs: Starting car animation");
+
+            ResetCarStateToAnimationStart();
+            
             //According to the number of audio cues, create audio source components
             SetupAudioSourceComponents();
             
             //Flag used in Update() to "play" car moving animation
             bPlayAnimation = true;
-
-            StartCoroutine(StopAnimationAfterTimerEnds());
             
             //Iterate through all audio cues for the current animation setting and play respective audio after some elapsed time
             if (m_currentAnimationSetting)
@@ -97,14 +96,21 @@ namespace Ped_AV_Study
                 }
             }
         }
-
-        IEnumerator StopAnimationAfterTimerEnds()
+        
+        //Resets the state of the car to when there is no animation (for example: Car is placed at its scene start location)
+        private void ResetCarStateToDefault()
         {
-            yield return new WaitForSeconds(m_currentAnimationSetting.animationTime);
-          
-            StopAnimation();
+            //Reset car position to no animation position / reference position
+            transform.SetPositionAndRotation(m_initCarPosition, m_initCarRotation);
         }
-
+        
+        //Resets the state of the car required when the animation just begins( for example: Car is placed at animation start location)
+        private void ResetCarStateToAnimationStart()
+        {
+            // Set up the animation initial transform for the car
+            transform.SetPositionAndRotation(m_animStartPosition, m_animStartRotation);
+        }
+        
         IEnumerator PlaySoundAtTime(CarAudioSetting audioSetting, AudioSource audioSource)
         {
             yield return new WaitForSeconds(audioSetting.timeToPlayAudio);
@@ -119,13 +125,16 @@ namespace Ped_AV_Study
 
         public void StopAnimation(bool bResetCarState = false)
         {
+            if (bPlayAnimation == false)
+            {
+                Debug.LogWarning("MANIPULATECAR.CS: Animation was not playing when StopAnimation was called. Returning.");
+                return;
+            }
+            
             Debug.Log("MANIPULATECAR.cs: Stopping animation, reset car state: " + bResetCarState);
 
             bPlayAnimation = false;
             m_elapsedTime = 0f;
-          
-            //Clear any coroutine in the case animation was stopped prematurely
-            StopCoroutine(nameof(StopAnimationAfterTimerEnds));
             
             //Clear all audio playing coroutines in case animation was stopped prematurely
             foreach (IEnumerator coroutine in m_audioCueCoroutines)
@@ -138,13 +147,9 @@ namespace Ped_AV_Study
             //Remove all audio source components from the game object
             RemoveAudioSourceComponents();
             
-
-            //Reset car state
+            //Reset car state to state when no animation plays
             if (bResetCarState)
-            {
-                //Reset car position to no animation position / reference position
-                transform.SetPositionAndRotation(m_initCarPosition, m_animStartRotation);
-            }
+                ResetCarStateToDefault();
           
         }
   
@@ -164,12 +169,12 @@ namespace Ped_AV_Study
             {
                 StartAnimation();
             }
-
             
-            if (!bPlayAnimation) return;
+            //If no animation is playing, or there is no assigned animation setting, return
+            if (!bPlayAnimation || !m_currentAnimationSetting) return;
             
             //When animation is running, calculate and set state of the car including position, wheel rotation, etc.
-            if (m_currentAnimationSetting && m_elapsedTime < m_currentAnimationSetting.animationTime)
+            if (m_elapsedTime < m_currentAnimationSetting.animationTime)
             {
                 // Increment the elapsed time
                 m_elapsedTime += Time.deltaTime;
@@ -192,6 +197,11 @@ namespace Ped_AV_Study
                 
                 //Update last frame position
                 m_animPositionLastFrame = transform.position;
+            }
+            else
+            {
+                Debug.Log("MANIPULATECAR.cs: Animation time has completed. Stopping animation.");
+                StopAnimation();
             }
         }
 
