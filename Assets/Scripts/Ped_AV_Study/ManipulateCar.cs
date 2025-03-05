@@ -150,17 +150,17 @@ namespace Ped_AV_Study
   
         void Update()
         {
-            if (Input.GetKey(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.R))
             {
                 StopAnimation();
             }
             
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 StopAnimation(true);
             }
             
-            if (Input.GetKey(KeyCode.P))
+            if (Input.GetKeyDown(KeyCode.P))
             {
                 StartAnimation();
             }
@@ -197,6 +197,8 @@ namespace Ped_AV_Study
 
         private void SetupAudioSourceComponents()
         {
+            // Debug.Log("MANIPULATECAR.cs: Adding audio source components ");
+
             //Create n number of audio sources, and add them to a list
             foreach (CarAudioSetting carAudioSetting in m_currentAnimationSetting.carAudioSettings)
             {
@@ -214,6 +216,14 @@ namespace Ped_AV_Study
 
         private void RemoveAudioSourceComponents()
         {
+            // Debug.Log("MANIPULATECAR.cs: Removing audio source components ");
+
+            if (m_audioSources.Count == 0)
+            {
+                Debug.Log("MANIPULATECAR.cs: Audio source components are empty when trying to remove them. Returning");
+                return;
+            }
+            
             foreach (AudioSource source in m_audioSources)
             {
                 source.Stop();
