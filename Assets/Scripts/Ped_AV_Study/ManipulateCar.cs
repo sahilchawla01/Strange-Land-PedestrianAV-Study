@@ -9,7 +9,6 @@ namespace Ped_AV_Study
     [RequireComponent(typeof(AnimateWheels))]
     public class ManipulateCar : MonoBehaviour
     {
-        public AnimationCurve easeCurve = AnimationCurve.EaseInOut(0, 0, 1, 1); // Easing curve
         public CarAnimationSetting initAnimationSetting;
         public List<CarAnimationSetting> carAnimations = new List<CarAnimationSetting>();
       
@@ -152,7 +151,7 @@ namespace Ped_AV_Study
                 float normalizedTime = (m_elapsedTime / m_currentAnimationSetting.animationTime);
       
                 // Apply easing using the AnimationCurve
-                float easedTime = easeCurve.Evaluate(normalizedTime);
+                float easedTime = m_currentAnimationSetting.easeCurve.Evaluate(normalizedTime);
       
                 // Interpolate between the start and final positions
                 transform.position = Vector3.LerpUnclamped(m_startPosition, m_finalPosition, easedTime);
