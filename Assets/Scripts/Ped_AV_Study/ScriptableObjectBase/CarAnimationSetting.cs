@@ -10,7 +10,7 @@ namespace Ped_AV_Study.ScriptableObjectBase
     {
         // Distance from the current position to start the animation
         [Tooltip("Distance from the current position to start the animation from")] 
-        public UInt16 distanceFromStartPosition = 100;
+        public Int16 distanceFromStartPosition = 100;
         //If greater than 0, stop animation 'x' distance from final position
         [Tooltip("If greater than 0, stop car animation 'x' distance from final position")]
         public UInt16 earlyStoppingDistance = 20;

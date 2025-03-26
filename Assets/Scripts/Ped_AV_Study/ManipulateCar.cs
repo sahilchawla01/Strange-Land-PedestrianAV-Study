@@ -11,7 +11,12 @@ namespace Ped_AV_Study
     {
         public CarAnimationSetting initAnimationSetting;
         public List<CarAnimationSetting> carAnimations = new List<CarAnimationSetting>();
-      
+
+        public CarAnimationSetting NearDistAnimationSetting;
+        public CarAnimationSetting MediumDistAnimationSetting;
+        public CarAnimationSetting FarDistAnimationSetting;
+        public CarAnimationSetting NoStopAnimationSetting;
+        
         // -- COMPONENTS --
         private List<AudioSource> m_audioSources = new List<AudioSource>();
         private CarAnimationSetting m_currentAnimationSetting;
