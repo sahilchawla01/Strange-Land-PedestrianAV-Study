@@ -64,7 +64,39 @@ public class ScenarioPickerManager : MonoBehaviour
     
     // --- Stopping Distance Menu Functions ---
     
-    
+    public void SaveStoppingDistance()
+    {
+        Toggle toggle = carBehaviorToggleGroup.ActiveToggles().FirstOrDefault();
+
+        if (toggle == null)
+        {
+            Debug.LogError("No car behavior toggle selected");
+            return;
+        }
+        
+        if (toggle.gameObject.name == "NearDistToggle") //The car should stop close to the ped
+        {
+            currentCarAnimationSetting = manipulateCarScript.NearDistAnimationSetting;
+        }
+        else if(toggle.gameObject.name == "MediumDistToggle") // The car should stop at a medium distance
+        {
+            currentCarAnimationSetting = manipulateCarScript.MediumDistAnimationSetting;
+        }
+        else //The car should stop afar
+        {
+            currentCarAnimationSetting = manipulateCarScript.FarDistAnimationSetting;
+        }
+    }
+
+    public void ReturnFromStoppingDistMenu()
+    {
+        //Save car behavior in case it wasn't set
+        if(currentCarAnimationSetting == null)
+            SaveStoppingDistance();
+        
+        ShowMainMenu();
+    }
+
     
     // --- END ---
     
