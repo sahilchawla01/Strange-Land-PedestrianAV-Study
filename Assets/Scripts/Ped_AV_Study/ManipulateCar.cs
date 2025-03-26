@@ -53,6 +53,12 @@ namespace Ped_AV_Study
 
         public void SetAnimationSettings(CarAnimationSetting animationSetting)
         {
+            if (animationSetting == null)
+            {
+                animationSetting = initAnimationSetting;
+                Debug.LogWarning("No animation setting was provided to set animation setting, using default anim setting");
+            }
+            
             //Store curr animation setting
             m_currentAnimationSetting = animationSetting;
             

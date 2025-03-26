@@ -11,17 +11,35 @@ public class ScenarioPickerManager : MonoBehaviour
     public GameObject CarBehaviorMenuUI;
     public GameObject StoppingDistMenuUI;
     public GameObject AudioMenuUI;
+    public GameObject CarAnimPlayingUI;
     
     public ToggleGroup carBehaviorToggleGroup;
     public ToggleGroup stoppingDistanceToggleGroup;
 
     public ManipulateCar manipulateCarScript;
     private CarAnimationSetting currentCarAnimationSetting;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    // -- Car Animation Functions -- 
+    public void StartCarAnimation()
     {
+        HideAllMenus();
         
+        manipulateCarScript.SetAnimationSettings(currentCarAnimationSetting);
+        manipulateCarScript.StartAnimation();
+        
+        CarAnimPlayingUI.SetActive(true);
     }
+
+    public void RestartCarAnimation()
+    {
+        HideAllMenus();
+        
+        manipulateCarScript.StopAnimation();
+        
+        ShowMainMenu();
+    }
+    
+    // -- END --
 
     // --- Car Behavior Menu Functions ---
     public void SaveCarBehavior()
@@ -155,5 +173,6 @@ public class ScenarioPickerManager : MonoBehaviour
         HideAudioMenu();
         HideStoppingDistMenu();
         HideCarBehaviorMenu();
+        CarAnimPlayingUI.SetActive(false);
     }
 }
