@@ -69,7 +69,7 @@ namespace Ped_AV_Study
             m_animStartRotation = transform.rotation;
           
             // Calculate the start position by moving in the opposite direction of the forward vector
-            m_animStartPosition = m_animFinalPosition - transform.forward * m_currentAnimationSetting.distanceFromStartPosition;
+            m_animStartPosition = m_animFinalPosition - transform.forward * m_currentAnimationSetting.totalAnimationDistance;
             m_animPositionLastFrame = m_animStartPosition;
             
         }

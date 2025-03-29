@@ -57,14 +57,14 @@ public class ScenarioPickerManager : MonoBehaviour
         
         if (toggle.gameObject.name == "StopToggle") //The car should stop
         {
-            currentCarAnimationSetting = manipulateCarScript.NearDistAnimationSetting;
+            currentCarAnimationSetting = Instantiate(manipulateCarScript.NearDistAnimationSetting);
         }
         else // The car should pass
         {
-            currentCarAnimationSetting = manipulateCarScript.NoStopAnimationSetting;
+            currentCarAnimationSetting = Instantiate(manipulateCarScript.NoStopAnimationSetting);
         }
         
-        Debug.Log("Saved Car Behavior " + currentCarAnimationSetting.name);
+        // Debug.Log("Saved Car Behavior " + currentCarAnimationSetting.name);
     }
 
     public void ReturnFromCarBehaviorMenu()
@@ -104,18 +104,18 @@ public class ScenarioPickerManager : MonoBehaviour
         
         if (toggle.gameObject.name == "NearDistToggle") //The car should stop close to the ped
         {
-            currentCarAnimationSetting = manipulateCarScript.NearDistAnimationSetting;
+            currentCarAnimationSetting = Instantiate(manipulateCarScript.NearDistAnimationSetting);
         }
         else if(toggle.gameObject.name == "MediumDistToggle") // The car should stop at a medium distance
         {
-            currentCarAnimationSetting = manipulateCarScript.MediumDistAnimationSetting;
+            currentCarAnimationSetting = Instantiate(manipulateCarScript.MediumDistAnimationSetting);
         }
         else //The car should stop afar
         {
-            currentCarAnimationSetting = manipulateCarScript.FarDistAnimationSetting;
+            currentCarAnimationSetting = Instantiate(manipulateCarScript.FarDistAnimationSetting);
         }
         
-        Debug.Log("Saved Car Stopping Distance " + currentCarAnimationSetting.name);
+        // Debug.Log("Saved Car Stopping Distance " + currentCarAnimationSetting.name);
 
     }
 
