@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Ped_AV_Study;
 using Ped_AV_Study.ScriptableObjectBase;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -113,6 +114,12 @@ public class ScenarioPickerManager : MonoBehaviour
 
             //Map ID of game object to car audio setting
             mapAudioUIToAudioSetting.Add(audioOption.GetInstanceID(), carAudioSetting);
+            
+            //Update text of UI to reflect audio setting
+            audioOption.transform.GetComponentInChildren<TextMeshProUGUI>().text = carAudioSetting.name;
+
+            //Assign toggle component to audio toggle group
+            audioOption.GetComponent<Toggle>().group = audioToggleGroup;
         }
     }
     public void SaveAudioClipToPlay()
@@ -129,7 +136,7 @@ public class ScenarioPickerManager : MonoBehaviour
         m_currentCarAnimationSetting.carAudioSettings.Clear();
         
         //Get audio setting corresponding to gameobject
-        CarAudioSetting carAudioSetting = mapAudioUIToAudioSetting[toggle.GetInstanceID()];
+        CarAudioSetting carAudioSetting = mapAudioUIToAudioSetting[toggle.gameObject.GetInstanceID()];
 
         if (carAudioSetting == null)
         {
