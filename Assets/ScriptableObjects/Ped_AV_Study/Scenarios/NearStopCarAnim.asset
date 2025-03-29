@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 130d8ae3d90d6754ca34ef4e60eeadd4, type: 3}
   m_Name: NearStopCarAnim
   m_EditorClassIdentifier: 
-  distanceFromStartPosition: 0
+  distanceFromStartPosition: 80
   earlyStoppingDistance: 10
   animationTime: 5
   easeCurve:

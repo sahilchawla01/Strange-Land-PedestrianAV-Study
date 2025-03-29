@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 130d8ae3d90d6754ca34ef4e60eeadd4, type: 3}
   m_Name: NoStopCarAnim
   m_EditorClassIdentifier: 
-  distanceFromStartPosition: -30
-  earlyStoppingDistance: 0
+  distanceFromStartPosition: 80
+  earlyStoppingDistance: -30
   animationTime: 5
   easeCurve:
     serializedVersion: 2

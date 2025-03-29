@@ -46,7 +46,7 @@ namespace Ped_AV_Study
             m_animateWheelsScript = GetComponent<AnimateWheels>();
           
             //Set animation setting before playing the car animation
-            SetAnimationSettings(initAnimationSetting);
+            // SetAnimationSettings(initAnimationSetting);
             
             // StartAnimation();
         }

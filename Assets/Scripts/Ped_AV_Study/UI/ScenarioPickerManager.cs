@@ -11,6 +11,7 @@ public class ScenarioPickerManager : MonoBehaviour
     public GameObject CarBehaviorMenuUI;
     public GameObject StoppingDistMenuUI;
     public GameObject AudioMenuUI;
+    public GameObject SelectAudioMenuUI;
     public GameObject CarAnimPlayingUI;
     
     public ToggleGroup carBehaviorToggleGroup;
@@ -52,6 +53,8 @@ public class ScenarioPickerManager : MonoBehaviour
             return;
         }
         
+        // Debug.Log("");
+        
         if (toggle.gameObject.name == "StopToggle") //The car should stop
         {
             currentCarAnimationSetting = manipulateCarScript.NearDistAnimationSetting;
@@ -60,6 +63,8 @@ public class ScenarioPickerManager : MonoBehaviour
         {
             currentCarAnimationSetting = manipulateCarScript.NoStopAnimationSetting;
         }
+        
+        Debug.Log("Saved Car Behavior " + currentCarAnimationSetting.name);
     }
 
     public void ReturnFromCarBehaviorMenu()
@@ -75,8 +80,13 @@ public class ScenarioPickerManager : MonoBehaviour
     // --- END ---
     
     // --- Audio Menu Functions ---
-    
-    
+
+    public void ReturnFromSelectAudioMenu()
+    {
+        HideAllMenus();
+        
+        ShowAudioMenu();
+    }
     
     // --- END ---
     
@@ -84,7 +94,7 @@ public class ScenarioPickerManager : MonoBehaviour
     
     public void SaveStoppingDistance()
     {
-        Toggle toggle = carBehaviorToggleGroup.ActiveToggles().FirstOrDefault();
+        Toggle toggle = stoppingDistanceToggleGroup.ActiveToggles().FirstOrDefault();
 
         if (toggle == null)
         {
@@ -104,6 +114,9 @@ public class ScenarioPickerManager : MonoBehaviour
         {
             currentCarAnimationSetting = manipulateCarScript.FarDistAnimationSetting;
         }
+        
+        Debug.Log("Saved Car Stopping Distance " + currentCarAnimationSetting.name);
+
     }
 
     public void ReturnFromStoppingDistMenu()
@@ -140,6 +153,13 @@ public class ScenarioPickerManager : MonoBehaviour
         AudioMenuUI.SetActive(true);
     }
 
+    public void ShowSelectAudioMenu()
+    {
+        HideAllMenus();
+        
+        SelectAudioMenuUI.SetActive(true);
+    }
+
     public void ShowMainMenu()
     {
         HideAllMenus();
@@ -174,5 +194,6 @@ public class ScenarioPickerManager : MonoBehaviour
         HideStoppingDistMenu();
         HideCarBehaviorMenu();
         CarAnimPlayingUI.SetActive(false);
+        SelectAudioMenuUI.SetActive(false);
     }
 }
