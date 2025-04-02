@@ -808,7 +808,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 15, y: 15}
+  m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &148651337
 MonoBehaviour:
@@ -85155,7 +85155,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1043465999}
   m_LocalRotation: {x: -0, y: -0, z: -3.152962e-10, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.8}
+  m_LocalPosition: {x: 0, y: 0, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -85211,10 +85211,22 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 781894450}
   toggleTransition: 1
   graphic: {fileID: 1161414376}
-  m_Group: {fileID: 1607077833}
+  m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1318013089}
+        m_TargetAssemblyTypeName: ScenarioPickerManager, Assembly-CSharp
+        m_MethodName: UpdateAudioLoopSetting
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!1 &1067239503
 GameObject:
@@ -85582,7 +85594,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 15, y: 15}
+  m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1161414376
 MonoBehaviour:
@@ -86121,6 +86133,8 @@ MonoBehaviour:
   carAudioSettings:
   - {fileID: 11400000, guid: a5e9b977f7e496e4dbc8f13aa6c929d7, type: 2}
   - {fileID: 11400000, guid: 324c8120ff885d843b145cb3051b0e87, type: 2}
+  audioLoopToggle: {fileID: 1043466001}
+  dynamicAudioToggle: {fileID: 1577289565}
   manipulateCarScript: {fileID: 547158522}
 --- !u!1001 &1339192701
 PrefabInstance:
@@ -87158,7 +87172,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1577289563}
   m_LocalRotation: {x: -0, y: -0, z: -3.152962e-10, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.8}
+  m_LocalPosition: {x: 0, y: 0, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -87214,10 +87228,22 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1881664561}
   toggleTransition: 1
   graphic: {fileID: 148651337}
-  m_Group: {fileID: 1607077833}
+  m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1318013089}
+        m_TargetAssemblyTypeName: ScenarioPickerManager, Assembly-CSharp
+        m_MethodName: UpdateDynamicAudioSetting
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!1 &1582662264
 GameObject:

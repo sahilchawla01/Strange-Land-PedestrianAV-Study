@@ -28,6 +28,8 @@ public class ScenarioPickerManager : MonoBehaviour
     public GameObject audioOptionsPanel;
     public GameObject audioOptionPrefab;
     public List<CarAudioSetting> carAudioSettings;
+    public Toggle audioLoopToggle;
+    public Toggle dynamicAudioToggle;
     private Dictionary<int, CarAudioSetting> mapAudioUIToAudioSetting = new Dictionary<int, CarAudioSetting>();
     [Header("Miscellaneous References")]
     public ManipulateCar manipulateCarScript;
@@ -104,6 +106,32 @@ public class ScenarioPickerManager : MonoBehaviour
     // --- Audio Menu Functions ---
     
     //Adds audio clip options to the audio menu based on the list of CarAudioSetting objects
+
+    public void UpdateAudioLoopSetting()
+    {
+        if (m_currentCarAudioSetting == null)
+        {
+            Debug.LogWarning("No car audio currently selected when setting the audio to loop");
+            return;
+        }
+        
+        Debug.Log("Updating audio loop: " + audioLoopToggle.isOn);
+        
+        m_currentCarAudioSetting.bLoopAudio = audioLoopToggle.isOn;
+    }
+    
+    public void UpdateDynamicAudioSetting()
+    {
+        if (m_currentCarAudioSetting == null)
+        {
+            Debug.LogWarning("No car audio currently selected when setting the audio to be 3 dimensional");
+            return;
+        }
+        
+        Debug.Log("Updating audio to 3D audio: " + dynamicAudioToggle.isOn);
+
+        m_currentCarAudioSetting.bDynamicAudio = dynamicAudioToggle.isOn;
+    }
     private void AddAudioClipsToMenu()
     {
         //Iterate over CarAudioSetting list

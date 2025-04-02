@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a128125c12502e24c8026dd9816638af, type: 3}
   m_Name: DefaultCarAudioSetting
   m_EditorClassIdentifier: 
-  volume: 0.2
-  timeToPlayAudio: 2
+  volume: 1
+  timeToPlayAudio: 0
+  bDynamicAudio: 0
+  bLoopAudio: 0
   audioClipToPlay: {fileID: 8300000, guid: a62df8d42f5a96944969bb7e0a5be625, type: 3}

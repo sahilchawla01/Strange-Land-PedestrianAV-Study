@@ -126,10 +126,14 @@ namespace Ped_AV_Study
         {
             yield return new WaitForSeconds(audioSetting.timeToPlayAudio);
             
+            //Loop audio if required to 
+            audioSource.loop = audioSetting.bLoopAudio;
+            
             //Play sound
             audioSource.clip = audioSetting.audioClipToPlay;
             audioSource.volume = audioSetting.volume;
             audioSource.Play();
+            
             
             Debug.Log("MANIPULATECAR.cs: PlaySoundAtTime was called for sound: " + audioSetting.audioClipToPlay.name);
         }
@@ -227,8 +231,16 @@ namespace Ped_AV_Study
                 AudioSource audioSource = gameObject.AddComponent<AudioSource>();
                 audioSource.playOnAwake = false;
                 //Set 3D audio
-                audioSource.spatialize = true;
-                audioSource.spatialBlend = 1.0f;
+                if (carAudioSetting.bDynamicAudio)
+                {
+                    audioSource.spatialize = true;
+                    audioSource.spatialBlend = 1.0f;
+                }
+                else //2D audio
+                {
+                    audioSource.spatialize = false;
+                    audioSource.spatialBlend = 0.0f;
+                }
                 
                 //Add audio source to a list
                 m_audioSources.Add(audioSource);
