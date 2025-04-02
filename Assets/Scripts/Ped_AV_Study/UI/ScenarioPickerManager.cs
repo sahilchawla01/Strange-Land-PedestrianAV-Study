@@ -115,7 +115,7 @@ public class ScenarioPickerManager : MonoBehaviour
             return;
         }
         
-        Debug.Log("Updating audio loop: " + audioLoopToggle.isOn);
+        // Debug.Log("Updating audio loop: " + audioLoopToggle.isOn);
         
         m_currentCarAudioSetting.bLoopAudio = audioLoopToggle.isOn;
     }
@@ -128,7 +128,7 @@ public class ScenarioPickerManager : MonoBehaviour
             return;
         }
         
-        Debug.Log("Updating audio to 3D audio: " + dynamicAudioToggle.isOn);
+        // Debug.Log("Updating audio to 3D audio: " + dynamicAudioToggle.isOn);
 
         m_currentCarAudioSetting.bDynamicAudio = dynamicAudioToggle.isOn;
     }
