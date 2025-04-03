@@ -91,7 +91,7 @@ PlayerSettings:
   submitAnalytics: 1
   usePlayerLog: 1
   dedicatedServerOptimizations: 1
-  bakeCollisionMeshes: 0
+  bakeCollisionMeshes: 1
   forceSingleInstance: 0
   useFlipModelSwapchain: 1
   resizableWindow: 0
@@ -146,6 +146,7 @@ PlayerSettings:
   - {fileID: -1408880019599053913, guid: 1c497c52310f9c34e878ba68f128dffa, type: 2}
   - {fileID: 6624388891201459163, guid: 8f6ae0950cefc5a478ccde40c7948149, type: 2}
   - {fileID: 11400000, guid: 482c56ebd3083c74499531bd82913fad, type: 2}
+  - {fileID: 102900000, guid: 9a5f92576ddbb5b4c8b3f922c891372c, type: 3}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
