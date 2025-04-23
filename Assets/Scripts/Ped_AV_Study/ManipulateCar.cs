@@ -170,21 +170,21 @@ namespace Ped_AV_Study
   
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                StopAnimation();
-            }
-            
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                StopAnimation(true);
-            }
-            
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                StartAnimation();
-            }
-            
+            // if (Input.GetKeyDown(KeyCode.R))
+            // {
+            //     StopAnimation();
+            // }
+            //
+            // if (Input.GetKeyDown(KeyCode.Space))
+            // {
+            //     StopAnimation(true);
+            // }
+            //
+            // if (Input.GetKeyDown(KeyCode.P))
+            // {
+            //     StartAnimation();
+            // }
+            //
             //If no animation is playing, or there is no assigned animation setting, return
             if (!bPlayAnimation || !m_currentAnimationSetting) return;
             
